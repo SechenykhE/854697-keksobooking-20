@@ -18,6 +18,8 @@ var LOCATION_Y_MAX = 630;
 var PIN_WIDTH = 50;
 var PIN_OFFSET_X = PIN_WIDTH / 2;
 var PIN_OFFSET_Y = 70;
+var HOUSING_PHOTO_WIDTH = 45;
+var HOUSING_PHOTO_HEIGHT = 40;
 
 var getRandomNumber = function (min, max) {
   min = Math.ceil(min);
@@ -122,6 +124,12 @@ var createPinsBlock = function (count, template, adsList, blockLocation, offsetX
 createPinsBlock(OBJECTS_COUNT, pinTemplate, ads, mapPins, PIN_OFFSET_X, PIN_OFFSET_Y);
 
 var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
+var housingTypes = {
+  'palace': 'Дворец',
+  'flat': 'Квартира',
+  'house': 'Дом',
+  'bungalo': 'Бунгало'
+};
 
 var createCardElement = function (template, ad) {
   var card = template.cloneNode(true);
@@ -129,23 +137,7 @@ var createCardElement = function (template, ad) {
   card.querySelector('.popup__title').textContent = ad.offer.title;
   card.querySelector('.popup__text--address').textContent = ad.offer.address;
   card.querySelector('.popup__text--price').textContent = ad.offer.price + '₽/ночь';
-
-  var popupType = card.querySelector('.popup__type');
-  switch (ad.offer.type) {
-    case 'palace':
-      popupType.textContent = 'Дворец';
-      break;
-    case 'flat':
-      popupType.textContent = 'Квартира';
-      break;
-    case 'house':
-      popupType.textContent = 'Дом';
-      break;
-    case 'bungalo':
-      popupType.textContent = 'Бунгало';
-      break;
-  }
-
+  card.querySelector('.popup__type').textContent = housingTypes[ad.offer.type];
   card.querySelector('.popup__text--capacity').textContent = ad.offer.rooms + ' комнаты для ' + ad.offer.guests + ' гостей';
   card.querySelector('.popup__text--time').textContent = 'Заезд после ' + ad.offer.checkin + ', выезд до ' + ad.offer.checkout;
 
@@ -168,8 +160,8 @@ var createCardElement = function (template, ad) {
     var newPhoto = document.createElement('img');
     newPhoto.src = ad.offer.photo[index];
     newPhoto.classList.add('popup__photo');
-    newPhoto.width = 45;
-    newPhoto.height = 40;
+    newPhoto.width = HOUSING_PHOTO_WIDTH;
+    newPhoto.height = HOUSING_PHOTO_HEIGHT;
     newPhoto.alt = 'Фотография жилья';
 
     return newPhoto;
