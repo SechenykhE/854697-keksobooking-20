@@ -18,8 +18,13 @@ var LOCATION_Y_MAX = 630;
 var PIN_WIDTH = 50;
 var PIN_OFFSET_X = PIN_WIDTH / 2;
 var PIN_OFFSET_Y = 70;
-var HOUSING_PHOTO_WIDTH = 45;
-var HOUSING_PHOTO_HEIGHT = 40;
+var MAIN_PIN_WIDTH = 65;
+var MAIN_PIN_OFFSET_X = Math.round(MAIN_PIN_WIDTH / 2);
+var MAIN_PIN_HEIGHT = 87;
+var MAIN_PIN_OFFSET_Y = Math.round(MAIN_PIN_HEIGHT / 2);
+
+/* var HOUSING_PHOTO_WIDTH = 45;
+var HOUSING_PHOTO_HEIGHT = 40;*/
 
 var getRandomNumber = function (min, max) {
   min = Math.ceil(min);
@@ -95,7 +100,6 @@ var getAdsList = function (number) {
 var ads = getAdsList(OBJECTS_COUNT);
 
 var map = document.querySelector('.map');
-map.classList.remove('map--faded');
 
 var mapPins = document.querySelector('.map__pins');
 var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
@@ -121,9 +125,83 @@ var createPinsBlock = function (count, template, adsList, blockLocation, offsetX
   blockLocation.appendChild(fragment);
 };
 
-createPinsBlock(OBJECTS_COUNT, pinTemplate, ads, mapPins, PIN_OFFSET_X, PIN_OFFSET_Y);
+var adForm = document.querySelector('.ad-form');
+var formFieldsets = document.querySelectorAll('fieldset');
+var mapFiltersForm = map.querySelector('.map__filters');
+var mapFiltersSelects = mapFiltersForm.querySelectorAll('select');
 
-var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
+var getPinsCoordinates = function (pin, offsetX, offsetY) {
+  var pinTop = pin.style.top;
+  var pinLeft = pin.style.left;
+  var pinX = parseInt(pinLeft.substring(0, pinLeft.length - 2), 10) + offsetX;
+  var pinY = parseInt(pinTop.substring(0, pinTop.length - 2), 10) + offsetY;
+  return pinX + ', ' + pinY;
+};
+
+var addDisabled = function (array, disabled) {
+  for (var i = 0; i < array.length; i++) {
+    array[i].disabled = disabled;
+  }
+};
+
+var mapPinMain = mapPins.querySelector('.map__pin--main');
+
+var activatePage = function () {
+  map.classList.remove('map--faded');
+  adForm.classList.remove('ad-form--disabled');
+  addDisabled(formFieldsets, false);
+  addDisabled(mapFiltersSelects, false);
+};
+
+var deactivatePage = function () {
+  map.classList.add('map--faded');
+  adForm.classList.add('.ad-form--disabled');
+  addDisabled(formFieldsets, true);
+  addDisabled(mapFiltersSelects, true);
+};
+
+deactivatePage();
+adForm.querySelector('#address').value = getPinsCoordinates(mapPinMain, MAIN_PIN_OFFSET_X, MAIN_PIN_OFFSET_Y);
+
+mapPinMain.addEventListener('mousedown', function (evt) {
+  if (evt.button === 0) {
+    activatePage();
+    createPinsBlock(OBJECTS_COUNT, pinTemplate, ads, mapPins, PIN_OFFSET_X, PIN_OFFSET_Y);
+    adForm.querySelector('#address').value = getPinsCoordinates(mapPinMain, MAIN_PIN_OFFSET_X, MAIN_PIN_HEIGHT);
+  }
+});
+
+mapPinMain.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Enter') {
+    activatePage();
+    createPinsBlock(OBJECTS_COUNT, pinTemplate, ads, mapPins, PIN_OFFSET_X, PIN_OFFSET_Y);
+    adForm.querySelector('#address').value = getPinsCoordinates(mapPinMain, MAIN_PIN_OFFSET_X, MAIN_PIN_HEIGHT);
+  }
+});
+
+var roomsNumber = adForm.querySelector('#room_number');
+var capacity = adForm.querySelector('#capacity');
+var validateRoomsAndGuests = function () {
+  if ((roomsNumber.value === '100') && (capacity.value !== '0')) {
+    capacity.setCustomValidity('не для гостей');
+  } else if (!(roomsNumber.value >= capacity.value) || (capacity.value === '0')) {
+    if (roomsNumber.value === '1') {
+      capacity.setCustomValidity('для 1 гостя');
+    } else if (roomsNumber.value === '2') {
+      capacity.setCustomValidity('для 1 гостя или 2 гостей');
+    } else {
+      capacity.setCustomValidity('для 1, 2-х или 3-х гостей');
+    }
+  } else {
+    capacity.setCustomValidity('');
+  }
+};
+
+roomsNumber.addEventListener('change', validateRoomsAndGuests);
+capacity.addEventListener('change', validateRoomsAndGuests);
+
+
+/* var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 var housingTypes = {
   'palace': 'Дворец',
   'flat': 'Квартира',
@@ -187,4 +265,4 @@ var createCardElement = function (template, ad) {
 var adsCard = createCardElement(cardTemplate, ads[0]);
 
 var mapFiltersContainer = document.querySelector('.map__filters-container');
-map.insertBefore(adsCard, mapFiltersContainer);
+map.insertBefore(adsCard, mapFiltersContainer);*/
