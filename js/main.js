@@ -111,7 +111,6 @@ var createPinElement = function (template, ad, offsetX, offsetY) {
   pin.style.top = ad.location.y - offsetY + 'px';
   pin.querySelector('img').src = ad.author.avatar;
   pin.querySelector('img').alt = ad.title;
-  pin.classList.add('map__pin--js');
 
   return pin;
 };
@@ -125,8 +124,6 @@ var createPinsBlock = function (count, template, adsList, blockLocation, offsetX
   }
   blockLocation.appendChild(fragment);
 };
-
-createPinsBlock(OBJECTS_COUNT, pinTemplate, ads, mapPins, PIN_OFFSET_X, PIN_OFFSET_Y);
 
 var adForm = document.querySelector('.ad-form');
 var formFieldsets = document.querySelectorAll('fieldset');
@@ -148,24 +145,12 @@ var addDisabled = function (array, disabled) {
 };
 
 var mapPinMain = mapPins.querySelector('.map__pin--main');
-var mapPinsJs = mapPins.querySelectorAll('.map__pin--js');
-
-var hideMapPins = function (pins, isHidden) {
-  for (var i = 0; i < pins.length; i++) {
-    if (isHidden) {
-      pins[i].classList.add('hidden');
-    } else {
-      pins[i].classList.remove('hidden');
-    }
-  }
-};
 
 var activatePage = function () {
   map.classList.remove('map--faded');
   adForm.classList.remove('ad-form--disabled');
   addDisabled(formFieldsets, false);
   addDisabled(mapFiltersSelects, false);
-  hideMapPins(mapPinsJs, false);
 };
 
 var deactivatePage = function () {
@@ -173,15 +158,19 @@ var deactivatePage = function () {
   adForm.classList.add('.ad-form--disabled');
   addDisabled(formFieldsets, true);
   addDisabled(mapFiltersSelects, true);
-  hideMapPins(mapPinsJs, true);
 };
 
 deactivatePage();
+
 adForm.querySelector('#address').value = getPinsCoordinates(mapPinMain, MAIN_PIN_OFFSET_X, MAIN_PIN_OFFSET_Y);
 
+var pins = [];
 mapPinMain.addEventListener('mousedown', function (evt) {
   if (evt.button === 0) {
     activatePage();
+    if (pins.length === 0) {
+      pins = createPinsBlock(OBJECTS_COUNT, pinTemplate, ads, mapPins, PIN_OFFSET_X, PIN_OFFSET_Y);
+    }
     adForm.querySelector('#address').value = getPinsCoordinates(mapPinMain, MAIN_PIN_OFFSET_X, MAIN_PIN_HEIGHT);
   }
 });
@@ -189,6 +178,9 @@ mapPinMain.addEventListener('mousedown', function (evt) {
 mapPinMain.addEventListener('keydown', function (evt) {
   if (evt.key === 'Enter') {
     activatePage();
+    if (pins.length === 0) {
+      pins = createPinsBlock(OBJECTS_COUNT, pinTemplate, ads, mapPins, PIN_OFFSET_X, PIN_OFFSET_Y);
+    }
     adForm.querySelector('#address').value = getPinsCoordinates(mapPinMain, MAIN_PIN_OFFSET_X, MAIN_PIN_HEIGHT);
   }
 });
