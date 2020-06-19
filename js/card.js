@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var FEATURES = window.constants.FEATURES;
   var housingTypes = {
     'palace': 'Дворец',
     'flat': 'Квартира',
@@ -20,11 +21,11 @@
 
     var popupFeatures = card.querySelector('.popup__features');
     var checkFeatures = function (index) {
-      if (!ad.offer.features.includes(window.main.FEATURES[index])) {
-        popupFeatures.querySelector('.popup__feature--' + window.main.FEATURES[i]).style.display = 'none';
+      if (!ad.offer.features.includes(FEATURES[index])) {
+        popupFeatures.querySelector('.popup__feature--' + FEATURES[i]).style.display = 'none';
       }
     };
-    for (var i = 0; i < window.main.FEATURES.length; i++) {
+    for (var i = 0; i < window.constants.FEATURES.length; i++) {
       checkFeatures(i);
     }
 
@@ -37,8 +38,8 @@
       var newPhoto = document.createElement('img');
       newPhoto.src = ad.offer.photo[index];
       newPhoto.classList.add('popup__photo');
-      newPhoto.width = window.main.HOUSING_PHOTO_WIDTH;
-      newPhoto.height = window.main.HOUSING_PHOTO_HEIGHT;
+      newPhoto.width = window.constants.HOUSING_PHOTO_WIDTH;
+      newPhoto.height = window.constants.HOUSING_PHOTO_HEIGHT;
       newPhoto.alt = 'Фотография жилья';
 
       return newPhoto;
@@ -59,5 +60,34 @@
     card.querySelector('.popup__avatar').src = ad.author.avatar;
 
     return card;
+  };
+
+  var map = document.querySelector('.map');
+
+  var closeCard = function () {
+    map.removeChild(map.querySelector('.map__card'));
+    document.removeEventListener('keydown', onCardEscPress);
+  };
+
+  var onCardEscPress = function (evt) {
+    if (evt.key === 'Escape') {
+      evt.preventDefault();
+      closeCard();
+    }
+  };
+
+  var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
+  var mapFiltersContainer = document.querySelector('.map__filters-container');
+
+  window.createOrUpdateCard = function (ad) {
+    var mapCard = map.querySelector('.map__card');
+    if (mapCard !== null) {
+      map.removeChild(mapCard);
+    }
+    mapCard = window.createCardElement(cardTemplate, ad);
+    map.insertBefore(mapCard, mapFiltersContainer);
+
+    mapCard.querySelector('.popup__close').addEventListener('click', closeCard);
+    document.addEventListener('keydown', onCardEscPress);
   };
 })();

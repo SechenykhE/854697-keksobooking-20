@@ -1,6 +1,6 @@
 'use strict';
 
-window.main = (function () {
+window.constants = (function () {
   var OBJECTS_COUNT = 8;
   var TITLE = 'Заголовок';
   var PRICE = 1000;
@@ -27,17 +27,6 @@ window.main = (function () {
   var HOUSING_PHOTO_WIDTH = 45;
   var HOUSING_PHOTO_HEIGHT = 40;
 
-  var shuffleArray = function (array) {
-    var shuffledArray = array.slice();
-    for (var i = shuffledArray.length - 1; i > 0; i--) {
-      var randomElement = Math.floor(Math.random() * (i + 1));
-      var buffer = shuffledArray[randomElement];
-      shuffledArray[randomElement] = shuffledArray[i];
-      shuffledArray[i] = buffer;
-    }
-    return shuffledArray;
-  };
-
   return {
     OBJECTS_COUNT: OBJECTS_COUNT,
     TITLE: TITLE,
@@ -60,22 +49,6 @@ window.main = (function () {
     MAIN_PIN_HEIGHT: MAIN_PIN_HEIGHT,
     MAIN_PIN_OFFSET_Y: MAIN_PIN_OFFSET_Y,
     HOUSING_PHOTO_WIDTH: HOUSING_PHOTO_WIDTH,
-    HOUSING_PHOTO_HEIGHT: HOUSING_PHOTO_HEIGHT,
-    getRandomNumber: function (min, max) {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    },
-    getRandomElementOfArray: function (values) {
-      return values[Math.floor(Math.random() * values.length)];
-    },
-    getRandomLengthArray: function (array, min) {
-      var newArray = shuffleArray(array);
-      var randomLength = this.getRandomNumber(min, newArray.length - 1);
-
-      var randomLengthArray = newArray.slice(0, randomLength);
-
-      return randomLengthArray;
-    }
+    HOUSING_PHOTO_HEIGHT: HOUSING_PHOTO_HEIGHT
   };
 })();
