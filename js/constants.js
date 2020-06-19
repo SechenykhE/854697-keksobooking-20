@@ -21,7 +21,7 @@ window.constants = (function () {
   var PIN_OFFSET_Y = 70;
   var MAIN_PIN_WIDTH = 65;
   var MAIN_PIN_OFFSET_X = Math.round(MAIN_PIN_WIDTH / 2);
-  var MAIN_PIN_HEIGHT = 87;
+  var MAIN_PIN_HEIGHT = 81;
   var MAIN_PIN_OFFSET_Y = Math.round(MAIN_PIN_HEIGHT / 2);
 
   var HOUSING_PHOTO_WIDTH = 45;
