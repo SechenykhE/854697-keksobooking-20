@@ -4,14 +4,6 @@
   var MAIN_PIN_OFFSET_X = window.constants.MAIN_PIN_OFFSET_X;
   var MAIN_PIN_HEIGHT = window.constants.MAIN_PIN_HEIGHT;
 
-  var getPinsCoordinates = function (pin, offsetX, offsetY) {
-    var pinTop = pin.style.top;
-    var pinLeft = pin.style.left;
-    var pinX = parseInt(pinLeft, 10) + offsetX;
-    var pinY = parseInt(pinTop, 10) + offsetY;
-    return pinX + ', ' + pinY;
-  };
-
   var map = document.querySelector('.map');
   var adForm = document.querySelector('.ad-form');
   var formFieldsets = document.querySelectorAll('fieldset');
@@ -43,19 +35,19 @@
   var mapPins = document.querySelector('.map__pins');
   var mapPinMain = mapPins.querySelector('.map__pin--main');
 
-  adForm.querySelector('#address').value = getPinsCoordinates(mapPinMain, MAIN_PIN_OFFSET_X, window.constants.MAIN_PIN_OFFSET_Y);
+  adForm.querySelector('#address').value = window.pinCoordinates.getPinsCoordinates(mapPinMain, MAIN_PIN_OFFSET_X, window.constants.MAIN_PIN_OFFSET_Y);
 
   mapPinMain.addEventListener('mousedown', function (evt) {
     if (evt.button === 0) {
       activatePage();
-      adForm.querySelector('#address').value = getPinsCoordinates(mapPinMain, MAIN_PIN_OFFSET_X, MAIN_PIN_HEIGHT);
+      adForm.querySelector('#address').value = window.pinCoordinates.getPinsCoordinates(mapPinMain, MAIN_PIN_OFFSET_X, MAIN_PIN_HEIGHT);
     }
   });
 
   mapPinMain.addEventListener('keydown', function (evt) {
     if (evt.key === 'Enter') {
       activatePage();
-      adForm.querySelector('#address').value = getPinsCoordinates(mapPinMain, MAIN_PIN_OFFSET_X, MAIN_PIN_HEIGHT);
+      adForm.querySelector('#address').value = window.pinCoordinates.getPinsCoordinates(mapPinMain, MAIN_PIN_OFFSET_X, MAIN_PIN_HEIGHT);
     }
   });
 })();
