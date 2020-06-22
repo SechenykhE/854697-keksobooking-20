@@ -36,7 +36,7 @@
 
     var getNewPhoto = function (index) {
       var newPhoto = document.createElement('img');
-      newPhoto.src = ad.offer.photo[index];
+      newPhoto.src = ad.offer.photos[index];
       newPhoto.classList.add('popup__photo');
       newPhoto.width = window.constants.HOUSING_PHOTO_WIDTH;
       newPhoto.height = window.constants.HOUSING_PHOTO_HEIGHT;
@@ -45,10 +45,10 @@
       return newPhoto;
     };
 
-    if (ad.offer.photo.length === 0) {
+    if (ad.offer.photos.length === 0) {
       popupPhotos.style.display = 'none';
     } else {
-      for (var j = 0; j < ad.offer.photo.length; j++) {
+      for (var j = 0; j < ad.offer.photos.length; j++) {
         var housingPhoto = getNewPhoto(j);
         fragmentForPhotos.appendChild(housingPhoto);
       }

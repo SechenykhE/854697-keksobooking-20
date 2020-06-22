@@ -27,6 +27,8 @@ window.constants = (function () {
   var HOUSING_PHOTO_WIDTH = 45;
   var HOUSING_PHOTO_HEIGHT = 40;
 
+  var URL_LOAD = 'https://javascript.pages.academy/keksobooking/data';
+
   return {
     OBJECTS_COUNT: OBJECTS_COUNT,
     TITLE: TITLE,
@@ -49,6 +51,7 @@ window.constants = (function () {
     MAIN_PIN_HEIGHT: MAIN_PIN_HEIGHT,
     MAIN_PIN_OFFSET_Y: MAIN_PIN_OFFSET_Y,
     HOUSING_PHOTO_WIDTH: HOUSING_PHOTO_WIDTH,
-    HOUSING_PHOTO_HEIGHT: HOUSING_PHOTO_HEIGHT
+    HOUSING_PHOTO_HEIGHT: HOUSING_PHOTO_HEIGHT,
+    URL_LOAD: URL_LOAD
   };
 })();

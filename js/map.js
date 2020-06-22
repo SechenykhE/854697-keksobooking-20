@@ -12,14 +12,18 @@
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
   var pins = [];
+  var onLoad = function (ads) {
+    pins = window.createPinsBlock(window.constants.OBJECTS_COUNT, pinTemplate, ads, mapPins, window.constants.PIN_OFFSET_X, window.constants.PIN_OFFSET_Y);
+  };
 
   var activatePage = function () {
     map.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
     window.utils.addDisabled(formFieldsets, false);
     window.utils.addDisabled(mapFiltersSelects, false);
+
     if (pins.length === 0) {
-      pins = window.createPinsBlock(window.constants.OBJECTS_COUNT, pinTemplate, window.ads, mapPins, window.constants.PIN_OFFSET_X, window.constants.PIN_OFFSET_Y);
+      window.backend.load(onLoad);
     }
   };
 
