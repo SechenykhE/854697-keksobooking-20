@@ -20,15 +20,12 @@
     return pin;
   };
 
-  window.createPinsBlock = function (count, template, adsList, blockLocation, offsetX, offsetY) {
+  window.createPinsBlock = function (template, adsList, blockLocation, offsetX, offsetY) {
     var fragment = document.createDocumentFragment();
-    var pins = [];
-    for (var i = 0; i < count; i++) {
+    for (var i = 0; i < adsList.length; i++) {
       var blockElement = createPinElement(template, adsList[i], offsetX, offsetY);
-      pins.push(blockElement);
       fragment.appendChild(blockElement);
     }
     blockLocation.appendChild(fragment);
-    return pins;
   };
 })();

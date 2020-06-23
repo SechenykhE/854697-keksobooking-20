@@ -11,9 +11,11 @@
   var mapFiltersSelects = mapFiltersForm.querySelectorAll('select');
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
-  var pins = [];
-  var onLoad = function (ads) {
-    pins = window.createPinsBlock(window.constants.OBJECTS_COUNT, pinTemplate, ads, mapPins, window.constants.PIN_OFFSET_X, window.constants.PIN_OFFSET_Y);
+  var adsFromServer = [];
+
+  var onLoad = function (response) {
+    adsFromServer = response;
+    window.createPinsBlock(pinTemplate, adsFromServer, mapPins, window.constants.PIN_OFFSET_X, window.constants.PIN_OFFSET_Y);
   };
 
   var activatePage = function () {
@@ -21,9 +23,8 @@
     adForm.classList.remove('ad-form--disabled');
     window.utils.addDisabled(formFieldsets, false);
     window.utils.addDisabled(mapFiltersSelects, false);
-
-    if (pins.length === 0) {
-      window.backend.load(onLoad);
+    if (adsFromServer.length === 0) {
+      window.backend.load(onLoad, window.onError);
     }
   };
 
