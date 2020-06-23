@@ -34,9 +34,9 @@
     var popupPhotos = card.querySelector('.popup__photos');
     var fragmentForPhotos = document.createDocumentFragment();
 
-    var getNewPhoto = function (index) {
+    var getNewPhoto = function (photo) {
       var newPhoto = document.createElement('img');
-      newPhoto.src = ad.offer.photo[index];
+      newPhoto.src = photo;
       newPhoto.classList.add('popup__photo');
       newPhoto.width = window.constants.HOUSING_PHOTO_WIDTH;
       newPhoto.height = window.constants.HOUSING_PHOTO_HEIGHT;
@@ -45,11 +45,11 @@
       return newPhoto;
     };
 
-    if (ad.offer.photo.length === 0) {
+    if (ad.offer.photos.length === 0) {
       popupPhotos.style.display = 'none';
     } else {
-      for (var j = 0; j < ad.offer.photo.length; j++) {
-        var housingPhoto = getNewPhoto(j);
+      for (var j = 0; j < ad.offer.photos.length; j++) {
+        var housingPhoto = getNewPhoto(ad.offer.photos[j]);
         fragmentForPhotos.appendChild(housingPhoto);
       }
     }

@@ -11,15 +11,20 @@
   var mapFiltersSelects = mapFiltersForm.querySelectorAll('select');
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
-  var pins = [];
+  var adsFromServer = [];
+
+  var onLoad = function (response) {
+    adsFromServer = response;
+    window.createPinsBlock(pinTemplate, adsFromServer, mapPins, window.constants.PIN_OFFSET_X, window.constants.PIN_OFFSET_Y);
+  };
 
   var activatePage = function () {
     map.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
     window.utils.addDisabled(formFieldsets, false);
     window.utils.addDisabled(mapFiltersSelects, false);
-    if (pins.length === 0) {
-      pins = window.createPinsBlock(window.constants.OBJECTS_COUNT, pinTemplate, window.ads, mapPins, window.constants.PIN_OFFSET_X, window.constants.PIN_OFFSET_Y);
+    if (adsFromServer.length === 0) {
+      window.backend.load(onLoad, window.onError);
     }
   };
 
