@@ -5,17 +5,28 @@
 
   window.createMessage = function (messageTemplate) {
     main.insertAdjacentElement('afterbegin', messageTemplate);
-    document.addEventListener('mousedown', function (evt) {
+
+    var onMousedownPress = function (evt) {
       if (evt.button === 0) {
-        main.removeChild(messageTemplate);
+        evt.preventDefault();
+        closeMessage();
       }
-    });
-    document.addEventListener('keydown', function (evt) {
+    };
+    var onEscPress = function (evt) {
       if (evt.key === 'Escape') {
         evt.preventDefault();
-        main.removeChild(messageTemplate);
+        closeMessage();
       }
-    });
+    };
+    var closeMessage = function () {
+      main.removeChild(messageTemplate);
+      document.removeEventListener('mousedown', onMousedownPress);
+      document.removeEventListener('keydown', onEscPress);
+    };
+
+    document.addEventListener('mousedown', onMousedownPress);
+    document.addEventListener('keydown', onEscPress);
+
     var button = messageTemplate.querySelector('button');
     if (button) {
       button.addEventListener('click', function () {
