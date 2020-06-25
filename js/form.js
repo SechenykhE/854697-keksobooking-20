@@ -61,4 +61,27 @@
 
   roomsNumber.addEventListener('change', validateRoomsAndGuests);
   capacity.addEventListener('change', validateRoomsAndGuests);
+
+  var successTemplate = document.querySelector('#success').content.querySelector('.success');
+  var errorTemplate = document.querySelector('#error').content.querySelector('.error');
+
+  var onErrorSubmit = function () {
+    window.createMessage(errorTemplate);
+  };
+
+  adForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    window.connectingServer('POST', window.constants.URL_SAVE, function () {
+      adForm.reset();
+      window.deactivatePage();
+      window.createMessage(successTemplate);
+    }, onErrorSubmit, new FormData(adForm));
+  });
+
+  var adFormReset = adForm.querySelector('.ad-form__reset');
+  adFormReset.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    adForm.reset();
+    window.deactivatePage();
+  });
 })();
