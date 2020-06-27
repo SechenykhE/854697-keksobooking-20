@@ -1,7 +1,7 @@
 'use strict';
 
 window.constants = (function () {
-  var OBJECTS_COUNT = 8;
+  var OBJECTS_COUNT = 5;
   var TITLE = 'Заголовок';
   var PRICE = 1000;
   var TYPES = ['palace', 'flat', 'house', 'bungalo'];
