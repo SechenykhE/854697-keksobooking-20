@@ -84,11 +84,10 @@
   var filterByType = mapFiltersForm.querySelector('#housing-type');
 
   var updatePins = function () {
-    var adsFilteredByType;
-    if (filterByType.value === 'any') {
-      adsFilteredByType = adsFromServer.slice();
-    } else {
-      adsFilteredByType = adsFromServer.slice().filter(function (ad) {
+    var adsFilteredByType = adsFromServer.slice();
+
+    if (filterByType.value !== 'any') {
+      adsFilteredByType = adsFilteredByType.filter(function (ad) {
         return ad.offer.type === filterByType.value;
       });
     }
