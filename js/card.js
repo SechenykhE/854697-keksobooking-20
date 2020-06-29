@@ -67,6 +67,7 @@
   var closeCard = function () {
     map.removeChild(map.querySelector('.map__card'));
     document.removeEventListener('keydown', onCardEscPress);
+    window.checkPinActive();
   };
 
   var onCardEscPress = function (evt) {
