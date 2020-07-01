@@ -14,6 +14,8 @@
   var mapFiltersSelects = mapFiltersForm.querySelectorAll('select');
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
   var previewAvatar = adForm.querySelector('.ad-form-header__preview img');
+  var housingPrice = adForm.querySelector('#price');
+  var capacity = adForm.querySelector('#capacity');
 
   var adsFromServer = [];
 
@@ -34,6 +36,8 @@
     map.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
     window.utils.addDisabled(formFieldsets, false);
+    housingPrice.placeholder = window.constants.FORM_PRICE_ACTIVATE;
+    capacity.value = window.constants.FORM_GUESTS_ACTIVATE;
     if (adsFromServer.length === 0) {
       window.connectingServer('GET', window.constants.URL_LOAD, onLoad, window.onError);
     }
@@ -62,6 +66,7 @@
     window.utils.addDisabled(formFieldsets, true);
     window.utils.addDisabled(mapFiltersFieldsets, true);
     window.utils.addDisabled(mapFiltersSelects, true);
+    housingPrice.placeholder = window.constants.FORM_PRICE_DEACTIVATE;
     mapPinMain.style.left = window.constants.MapPinMainPosition.LEFT;
     mapPinMain.style.top = window.constants.MapPinMainPosition.TOP;
     adForm.querySelector('#address').value = window.pinCoordinates.getPinsCoordinates(mapPinMain, MAIN_PIN_OFFSET_X, window.constants.MAIN_PIN_OFFSET_Y);
@@ -72,6 +77,7 @@
     checkCardOpen();
     window.checkHousingPhoto();
     previewAvatar.src = window.constants.AVATAR_PREVIEW;
+    mapFiltersForm.reset();
   };
 
   var mapPins = document.querySelector('.map__pins');

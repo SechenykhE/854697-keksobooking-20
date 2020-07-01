@@ -18,10 +18,22 @@
         closeMessage();
       }
     };
+    var onButtonPress = function () {
+      closeMessage();
+    };
     var closeMessage = function () {
-      main.removeChild(messageTemplate);
+      var error = main.querySelector('.error');
+      var success = main.querySelector('.success');
+      if (error) {
+        main.removeChild(error);
+      }
+      if (success) {
+        main.removeChild(success);
+      }
+
       document.removeEventListener('mousedown', onMousedownPress);
       document.removeEventListener('keydown', onEscPress);
+      button.removeEventListener('click', onButtonPress);
     };
 
     document.addEventListener('mousedown', onMousedownPress);
@@ -29,9 +41,7 @@
 
     var button = messageTemplate.querySelector('button');
     if (button) {
-      button.addEventListener('click', function () {
-        main.removeChild(messageTemplate);
-      });
+      button.addEventListener('click', onButtonPress);
     }
   };
 })();

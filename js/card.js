@@ -21,7 +21,9 @@
 
     var popupFeatures = card.querySelector('.popup__features');
     var checkFeatures = function (index) {
-      if (!ad.offer.features.includes(FEATURES[index])) {
+      if (ad.offer.features.length === 0) {
+        popupFeatures.style.display = 'none';
+      } else if (!ad.offer.features.includes(FEATURES[index])) {
         popupFeatures.querySelector('.popup__feature--' + FEATURES[i]).style.display = 'none';
       }
     };

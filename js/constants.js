@@ -17,6 +17,9 @@ window.constants = (function () {
   var MAIN_PIN_OFFSET_Y = Math.round(MAIN_PIN_HEIGHT / 2);
   var PRICE_POINT1 = 10000;
   var PRICE_POINT2 = 50000;
+  var FORM_PRICE_DEACTIVATE = 5000;
+  var FORM_PRICE_ACTIVATE = 1000;
+  var FORM_GUESTS_ACTIVATE = '1';
 
   var MapPinMainPosition = {
     LEFT: '570px',
@@ -29,7 +32,7 @@ window.constants = (function () {
   var HOUSING_PHOTO_PREVIEW_HEIGHT = 70;
 
   var URL_LOAD = 'https://javascript.pages.academy/keksobooking/data';
-  var URL_SAVE = 'https://javascript.pages.academy/keksobooking';
+  var URL_SAVE = 'https://javascript.pages.academy/keksobooking1';
   var TIMEOUT_IN_MS = 10000;
   var NODE = {
     general: 'z-index: 100; margin: 0 auto; text-align: center; background-color: white;',
@@ -62,6 +65,9 @@ window.constants = (function () {
     MAIN_PIN_OFFSET_Y: MAIN_PIN_OFFSET_Y,
     PRICE_POINT1: PRICE_POINT1,
     PRICE_POINT2: PRICE_POINT2,
+    FORM_PRICE_DEACTIVATE: FORM_PRICE_DEACTIVATE,
+    FORM_PRICE_ACTIVATE: FORM_PRICE_ACTIVATE,
+    FORM_GUESTS_ACTIVATE: FORM_GUESTS_ACTIVATE,
     HOUSING_PHOTO_WIDTH: HOUSING_PHOTO_WIDTH,
     HOUSING_PHOTO_HEIGHT: HOUSING_PHOTO_HEIGHT,
     HOUSING_PHOTO_PREVIEW_WIDTH: HOUSING_PHOTO_PREVIEW_WIDTH,
