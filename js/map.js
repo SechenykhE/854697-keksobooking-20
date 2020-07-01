@@ -13,6 +13,7 @@
   var mapFiltersFieldsets = mapFiltersForm.querySelectorAll('fieldset');
   var mapFiltersSelects = mapFiltersForm.querySelectorAll('select');
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+  var previewAvatar = adForm.querySelector('.ad-form-header__preview img');
 
   var adsFromServer = [];
 
@@ -69,6 +70,8 @@
     adsFromServer = [];
 
     checkCardOpen();
+    window.checkHousingPhoto();
+    previewAvatar.src = window.constants.AVATAR_PREVIEW;
   };
 
   var mapPins = document.querySelector('.map__pins');

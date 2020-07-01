@@ -25,6 +25,8 @@ window.constants = (function () {
 
   var HOUSING_PHOTO_WIDTH = 45;
   var HOUSING_PHOTO_HEIGHT = 40;
+  var HOUSING_PHOTO_PREVIEW_WIDTH = 70;
+  var HOUSING_PHOTO_PREVIEW_HEIGHT = 70;
 
   var URL_LOAD = 'https://javascript.pages.academy/keksobooking/data';
   var URL_SAVE = 'https://javascript.pages.academy/keksobooking';
@@ -41,6 +43,9 @@ window.constants = (function () {
   };
 
   var DEBOUNCE_INTERVAL = 500;
+
+  var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+  var AVATAR_PREVIEW = 'img/muffin-grey.svg';
 
   return {
     OBJECTS_COUNT: OBJECTS_COUNT,
@@ -59,11 +64,15 @@ window.constants = (function () {
     PRICE_POINT2: PRICE_POINT2,
     HOUSING_PHOTO_WIDTH: HOUSING_PHOTO_WIDTH,
     HOUSING_PHOTO_HEIGHT: HOUSING_PHOTO_HEIGHT,
+    HOUSING_PHOTO_PREVIEW_WIDTH: HOUSING_PHOTO_PREVIEW_WIDTH,
+    HOUSING_PHOTO_PREVIEW_HEIGHT: HOUSING_PHOTO_PREVIEW_HEIGHT,
     URL_LOAD: URL_LOAD,
     URL_SAVE: URL_SAVE,
     TIMEOUT_IN_MS: TIMEOUT_IN_MS,
     NODE: NODE,
     DEBOUNCE_INTERVAL: DEBOUNCE_INTERVAL,
+    FILE_TYPES: FILE_TYPES,
+    AVATAR_PREVIEW: AVATAR_PREVIEW,
     MapPinMainPosition: MapPinMainPosition
   };
 })();
