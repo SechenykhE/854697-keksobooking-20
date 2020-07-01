@@ -32,7 +32,7 @@ window.constants = (function () {
   var HOUSING_PHOTO_PREVIEW_HEIGHT = 70;
 
   var URL_LOAD = 'https://javascript.pages.academy/keksobooking/data';
-  var URL_SAVE = 'https://javascript.pages.academy/keksobooking1';
+  var URL_SAVE = 'https://javascript.pages.academy/keksobooking';
   var TIMEOUT_IN_MS = 10000;
   var NODE = {
     general: 'z-index: 100; margin: 0 auto; text-align: center; background-color: white;',
