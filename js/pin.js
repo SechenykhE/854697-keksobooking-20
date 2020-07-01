@@ -8,10 +8,14 @@
     pin.querySelector('img').src = ad.author.avatar;
     pin.querySelector('img').alt = ad.title;
     pin.addEventListener('click', function () {
+      window.checkPinActive();
+      pin.classList.add('map__pin--active');
       window.createOrUpdateCard(ad);
     });
     pin.addEventListener('keydown', function (evt) {
       if (evt.key === 'Enter') {
+        window.checkPinActive();
+        pin.classList.add('map__pin--active');
         window.createOrUpdateCard(ad);
       }
     });
@@ -29,5 +33,12 @@
     }
     window.checkPinsOnMap();
     blockLocation.appendChild(fragment);
+  };
+
+  window.checkPinActive = function () {
+    var pinActiv = document.querySelector('.map__pin--active');
+    if (pinActiv) {
+      pinActiv.classList.remove('map__pin--active');
+    }
   };
 })();
