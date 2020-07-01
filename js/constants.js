@@ -45,6 +45,7 @@ window.constants = (function () {
   var DEBOUNCE_INTERVAL = 500;
 
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+  var AVATAR_PREVIEW = 'img/muffin-grey.svg';
 
   return {
     OBJECTS_COUNT: OBJECTS_COUNT,
@@ -71,6 +72,7 @@ window.constants = (function () {
     NODE: NODE,
     DEBOUNCE_INTERVAL: DEBOUNCE_INTERVAL,
     FILE_TYPES: FILE_TYPES,
+    AVATAR_PREVIEW: AVATAR_PREVIEW,
     MapPinMainPosition: MapPinMainPosition
   };
 })();

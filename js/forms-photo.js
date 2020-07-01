@@ -26,16 +26,20 @@
     }
   };
 
-  formsAvatar.addEventListener('change', function () {
-    showsImagePreview(formsAvatar, previewAvatar);
-  });
-
-  formsHousingPhoto.addEventListener('change', function () {
+  window.checkHousingPhoto = function () {
     var housingPhoto = previewHousingPhoto.querySelector('img');
 
     if (housingPhoto) {
       previewHousingPhoto.removeChild(housingPhoto);
     }
+  };
+
+  formsAvatar.addEventListener('change', function () {
+    showsImagePreview(formsAvatar, previewAvatar);
+  });
+
+  formsHousingPhoto.addEventListener('change', function () {
+    window.checkHousingPhoto();
 
     var picture = document.createElement('img');
 
