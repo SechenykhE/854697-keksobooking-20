@@ -1,6 +1,6 @@
 'use strict';
 
-window.constants = (function () {
+(function () {
   var OBJECTS_COUNT = 5;
   var TYPES = ['palace', 'flat', 'house', 'bungalo'];
   var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
@@ -48,7 +48,7 @@ window.constants = (function () {
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
   var AVATAR_PREVIEW = 'img/muffin-grey.svg';
 
-  return {
+  window.constants = {
     OBJECTS_COUNT: OBJECTS_COUNT,
     TYPES: TYPES,
     FEATURES: FEATURES,

@@ -1,7 +1,7 @@
 'use strict';
 
-window.pinCoordinates = (function () {
-  return {
+(function () {
+  window.pinCoordinates = {
     getPinsCoordinateX: function (pin, offset) {
       var pinLeft = pin.style.left;
 

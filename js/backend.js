@@ -1,6 +1,6 @@
 'use strict';
 
-window.backend = (function () {
+(function () {
   var TIMEOUT_IN_MS = window.constants.TIMEOUT_IN_MS;
   var StatusCode = {
     OK: 200,

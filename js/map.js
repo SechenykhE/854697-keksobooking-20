@@ -25,7 +25,7 @@
         return ad.hasOwnProperty('offer');
       });
     }
-    window.createPinsBlock(window.constants.OBJECTS_COUNT, pinTemplate, adsFromServer, mapPins, window.constants.PIN_OFFSET_X, window.constants.PIN_OFFSET_Y);
+    window.pin.createPinsBlock(window.constants.OBJECTS_COUNT, pinTemplate, adsFromServer, mapPins, window.constants.PIN_OFFSET_X, window.constants.PIN_OFFSET_Y);
 
     window.utils.addDisabled(mapFiltersFieldsets, false);
     window.utils.addDisabled(mapFiltersSelects, false);
@@ -45,10 +45,10 @@
     if (mapCard !== null) {
       map.removeChild(mapCard);
     }
-    window.checkPinActive();
+    window.pin.checkPinActive();
   };
 
-  window.checkPinsOnMap = function () {
+  var checkPinsOnMap = function () {
     var pinsOnMap = mapPins.querySelectorAll('.map__pin:not(.map__pin--main)');
     if (pinsOnMap) {
       for (var i = pinsOnMap.length - 1; i >= 0; i--) {
@@ -57,7 +57,7 @@
     }
   };
 
-  window.deactivatePage = function () {
+  var deactivatePage = function () {
     map.classList.add('map--faded');
     adForm.classList.add('ad-form--disabled');
     window.utils.addDisabled(formFieldsets, true);
@@ -68,18 +68,18 @@
     mapPinMain.style.top = window.constants.MapPinMainPosition.TOP;
     adForm.querySelector('#address').value = window.pinCoordinates.getPinsCoordinates(mapPinMain, MAIN_PIN_OFFSET_X, window.constants.MAIN_PIN_OFFSET_Y);
 
-    window.checkPinsOnMap();
+    checkPinsOnMap();
     adsFromServer = [];
 
     checkCardOpen();
-    window.checkHousingPhoto();
+    window.formsPhoto.checkHousingPhoto();
     previewAvatar.src = window.constants.AVATAR_PREVIEW;
     mapFiltersForm.reset();
   };
 
   var mapPins = document.querySelector('.map__pins');
   var mapPinMain = mapPins.querySelector('.map__pin--main');
-  window.deactivatePage();
+  deactivatePage();
 
   mapPinMain.addEventListener('mousedown', function (evt) {
     if (evt.button === 0) {
@@ -116,7 +116,7 @@
     return priceValue;
   };
 
-  var changingFilters = function () {
+  var onMapFiltersChange = function () {
     var filterByFeatures = filterByFeaturesFieldset.querySelectorAll('input:checked');
 
     var filterByFeaturesList = [];
@@ -157,8 +157,13 @@
   });
 
   var updatePins = function (ads) {
-    window.createPinsBlock(window.constants.OBJECTS_COUNT, pinTemplate, ads, mapPins, window.constants.PIN_OFFSET_X, window.constants.PIN_OFFSET_Y);
+    window.pin.createPinsBlock(window.constants.OBJECTS_COUNT, pinTemplate, ads, mapPins, window.constants.PIN_OFFSET_X, window.constants.PIN_OFFSET_Y);
   };
 
-  mapFiltersForm.addEventListener('change', changingFilters);
+  mapFiltersForm.addEventListener('change', onMapFiltersChange);
+
+  window.map = {
+    checkPinsOnMap: checkPinsOnMap,
+    deactivatePage: deactivatePage
+  };
 })();

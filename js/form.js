@@ -18,10 +18,10 @@
   var housingType = adForm.querySelector('#type');
   var housingPrice = adForm.querySelector('#price');
   var housingTypesPrice = {
-    'bungalo': '0',
-    'flat': '1000',
-    'house': '5000',
-    'palace': '10000'
+    bungalo: '0',
+    flat: '1000',
+    house: '5000',
+    palace: '10000'
   };
   housingType.addEventListener('change', function () {
     housingPrice.min = housingTypesPrice[housingType.value];
@@ -39,10 +39,10 @@
 
   var roomsNumber = adForm.querySelector('#room_number');
   var capacity = adForm.querySelector('#capacity');
-  var validateRoomsAndGuests = function () {
+  var onRoomsAndCapacityValidation = function () {
     if ((roomsNumber.value === '100') && (capacity.value !== '0')) {
       capacity.setCustomValidity('не для гостей');
-    } else if (!(roomsNumber.value >= capacity.value) || (capacity.value === '0')) {
+    } else if ((roomsNumber.value !== '100') && (!(roomsNumber.value >= capacity.value) || (capacity.value === '0'))) {
       switch (roomsNumber.value) {
         case '1':
           capacity.setCustomValidity('для 1 гостя');
@@ -59,8 +59,8 @@
     }
   };
 
-  roomsNumber.addEventListener('change', validateRoomsAndGuests);
-  capacity.addEventListener('change', validateRoomsAndGuests);
+  roomsNumber.addEventListener('change', onRoomsAndCapacityValidation);
+  capacity.addEventListener('change', onRoomsAndCapacityValidation);
 
   var successTemplate = document.querySelector('#success').content.querySelector('.success');
   var errorTemplate = document.querySelector('#error').content.querySelector('.error');
@@ -73,7 +73,7 @@
     evt.preventDefault();
     window.connectingServer('POST', window.constants.URL_SAVE, function () {
       adForm.reset();
-      window.deactivatePage();
+      window.map.deactivatePage();
       window.createMessage(successTemplate);
     }, onErrorSubmit, new FormData(adForm));
   });
@@ -82,6 +82,6 @@
   adFormReset.addEventListener('click', function (evt) {
     evt.preventDefault();
     adForm.reset();
-    window.deactivatePage();
+    window.map.deactivatePage();
   });
 })();

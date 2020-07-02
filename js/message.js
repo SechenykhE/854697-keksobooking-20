@@ -6,19 +6,19 @@
   window.createMessage = function (messageTemplate) {
     main.insertAdjacentElement('afterbegin', messageTemplate);
 
-    var onMousedownPress = function (evt) {
+    var onDocumentMousedownPress = function (evt) {
       if (evt.button === 0) {
         evt.preventDefault();
         closeMessage();
       }
     };
-    var onEscPress = function (evt) {
+    var onDocumentEscPress = function (evt) {
       if (evt.key === 'Escape') {
         evt.preventDefault();
         closeMessage();
       }
     };
-    var onButtonPress = function () {
+    var onButtonClick = function () {
       closeMessage();
     };
     var closeMessage = function () {
@@ -31,17 +31,17 @@
         main.removeChild(success);
       }
 
-      document.removeEventListener('mousedown', onMousedownPress);
-      document.removeEventListener('keydown', onEscPress);
-      button.removeEventListener('click', onButtonPress);
+      document.removeEventListener('mousedown', onDocumentMousedownPress);
+      document.removeEventListener('keydown', onDocumentEscPress);
+      button.removeEventListener('click', onButtonClick);
     };
 
-    document.addEventListener('mousedown', onMousedownPress);
-    document.addEventListener('keydown', onEscPress);
+    document.addEventListener('mousedown', onDocumentMousedownPress);
+    document.addEventListener('keydown', onDocumentEscPress);
 
     var button = messageTemplate.querySelector('button');
     if (button) {
-      button.addEventListener('click', onButtonPress);
+      button.addEventListener('click', onButtonClick);
     }
   };
 })();

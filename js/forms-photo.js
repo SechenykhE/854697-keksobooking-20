@@ -26,7 +26,7 @@
     }
   };
 
-  window.checkHousingPhoto = function () {
+  var checkHousingPhoto = function () {
     var housingPhoto = previewHousingPhoto.querySelector('img');
 
     if (housingPhoto) {
@@ -39,7 +39,7 @@
   });
 
   formsHousingPhoto.addEventListener('change', function () {
-    window.checkHousingPhoto();
+    checkHousingPhoto();
 
     var picture = document.createElement('img');
 
@@ -49,4 +49,8 @@
 
     previewHousingPhoto.appendChild(picture);
   });
+
+  window.formsPhoto = {
+    checkHousingPhoto: checkHousingPhoto
+  };
 })();
