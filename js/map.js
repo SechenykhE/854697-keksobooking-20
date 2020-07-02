@@ -15,7 +15,6 @@
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
   var previewAvatar = adForm.querySelector('.ad-form-header__preview img');
   var housingPrice = adForm.querySelector('#price');
-  var capacity = adForm.querySelector('#capacity');
 
   var adsFromServer = [];
 
@@ -36,8 +35,6 @@
     map.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
     window.utils.addDisabled(formFieldsets, false);
-    housingPrice.placeholder = window.constants.FORM_PRICE_ACTIVATE;
-    capacity.value = window.constants.FORM_GUESTS_ACTIVATE;
     if (adsFromServer.length === 0) {
       window.connectingServer('GET', window.constants.URL_LOAD, onLoad, window.onError);
     }
