@@ -3,7 +3,7 @@
 (function () {
   var NODE = window.constants.NODE;
 
-  window.onError = function (errorMessage) {
+  var onError = function (errorMessage) {
     var node = document.createElement('div');
     node.style = NODE.general;
     node.style.position = NODE.position;
@@ -16,5 +16,9 @@
 
     node.textContent = errorMessage;
     document.body.insertAdjacentElement('afterbegin', node);
+  };
+
+  window.error = {
+    onError: onError
   };
 })();

@@ -23,23 +23,26 @@
     return pin;
   };
 
-  window.pin = {
-    createPinsBlock: function (count, template, adsList, blockLocation, offsetX, offsetY) {
-      var takeNumber = adsList.length > count ? count : adsList.length;
+  var createPinsBlock = function (count, template, adsList, blockLocation, offsetX, offsetY) {
+    var takeNumber = adsList.length > count ? count : adsList.length;
 
-      var fragment = document.createDocumentFragment();
-      for (var i = 0; i < takeNumber; i++) {
-        var blockElement = createPinElement(template, adsList[i], offsetX, offsetY);
-        fragment.appendChild(blockElement);
-      }
-      window.map.checkPinsOnMap();
-      blockLocation.appendChild(fragment);
-    },
-    checkPinActive: function () {
-      var pinActiv = document.querySelector('.map__pin--active');
-      if (pinActiv) {
-        pinActiv.classList.remove('map__pin--active');
-      }
+    var fragment = document.createDocumentFragment();
+    for (var i = 0; i < takeNumber; i++) {
+      var blockElement = createPinElement(template, adsList[i], offsetX, offsetY);
+      fragment.appendChild(blockElement);
     }
+    window.map.checkPinsOnMap();
+    blockLocation.appendChild(fragment);
+  };
+  var checkPinActive = function () {
+    var pinActiv = document.querySelector('.map__pin--active');
+    if (pinActiv) {
+      pinActiv.classList.remove('map__pin--active');
+    }
+  };
+
+  window.pin = {
+    createPinsBlock: createPinsBlock,
+    checkPinActive: checkPinActive
   };
 })();

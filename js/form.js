@@ -66,15 +66,15 @@
   var errorTemplate = document.querySelector('#error').content.querySelector('.error');
 
   var onErrorSubmit = function () {
-    window.createMessage(errorTemplate);
+    window.message.createMessage(errorTemplate);
   };
 
   adForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    window.connectingServer('POST', window.constants.URL_SAVE, function () {
+    window.backend.connectingServer('POST', window.constants.URL_SAVE, function () {
       adForm.reset();
       window.map.deactivatePage();
-      window.createMessage(successTemplate);
+      window.message.createMessage(successTemplate);
     }, onErrorSubmit, new FormData(adForm));
   });
 

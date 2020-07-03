@@ -3,7 +3,7 @@
 (function () {
   var main = document.querySelector('main');
 
-  window.createMessage = function (messageTemplate) {
+  var createMessage = function (messageTemplate) {
     main.insertAdjacentElement('afterbegin', messageTemplate);
 
     var onDocumentMousedownPress = function (evt) {
@@ -43,5 +43,9 @@
     if (button) {
       button.addEventListener('click', onButtonClick);
     }
+  };
+
+  window.message = {
+    createMessage: createMessage
   };
 })();

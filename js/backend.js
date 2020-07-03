@@ -9,7 +9,7 @@
     NOT_FOUND: 404
   };
 
-  window.connectingServer = function (method, url, onLoad, onError, data) {
+  var connectingServer = function (method, url, onLoad, onError, data) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -49,5 +49,9 @@
 
     xhr.open(method, url);
     xhr.send(data);
+  };
+
+  window.backend = {
+    connectingServer: connectingServer
   };
 })();

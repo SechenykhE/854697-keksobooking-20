@@ -36,7 +36,7 @@
     adForm.classList.remove('ad-form--disabled');
     window.utils.addDisabled(formFieldsets, false);
     if (adsFromServer.length === 0) {
-      window.connectingServer('GET', window.constants.URL_LOAD, onLoad, window.onError);
+      window.backend.connectingServer('GET', window.constants.URL_LOAD, onLoad, window.error.onError);
     }
   };
 
